@@ -1,2 +1,6 @@
-audit_certificate.json
+.DS_Store
 *.pem
+audit_certificate.json
+synapse.db*
+logs/
+.synapse/
