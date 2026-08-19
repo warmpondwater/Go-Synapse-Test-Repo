@@ -1,13 +1,5 @@
-export interface UserProfile {
-    id: string;
-    username: string;
-    email: string;
-}
+import { UserProfile, IUserManager } from './types';
 
-export interface IUserManager {
-    registerUser(profile: UserProfile): void;
-    getUserCount(): number;
-}
 
 // (DEAD CODE)
 export class AbandonedTsHelper {

@@ -1,0 +1,19 @@
+{
+  "name": "go-synapse-test-repo",
+  "version": "1.0.0",
+  "description": "Multi-language AST, LSP, and SCA testbed repository",
+  "main": "js_src/test.js",
+  "scripts": {
+    "test": "./run_verification.sh"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "axios": "^1.6.8",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "author": "warmpondwater",
+  "license": "MIT"
+}

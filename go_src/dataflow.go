@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"unsafe"
+
+	"github.com/warmpondwater/Go-Synapse-Test-Repo/go_src/auth"
 )
 
 // TokenProcessor defines the interface for token validation
@@ -55,5 +57,6 @@ func RunDataFlow() {
 	ExecuteDatabaseQuery(clean)
 
 	_ = pipeline.Process(clean)
+	_ = auth.VerifyAuthToken(clean)
 }
 

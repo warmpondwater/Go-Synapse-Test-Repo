@@ -38,14 +38,14 @@
   "test_suites": {
     "go": {
       "path": "go_src",
-      "files": ["main.go", "dataflow.go", "dead_code.go", "generated_proto.go"],
-      "expected_nodes": ["TokenProcessor", "SecurityPipeline", "GetUserInput", "SanitizeInput", "ExecuteDatabaseQuery", "RunDataFlow", "InspectMemoryHeader", "MasterAPIKey", "TotallyUnusedGlobalVariable", "ForgottenFunctionThatDoesNothing", "AbandonedStruct"],
+      "files": ["main.go", "dataflow.go", "dead_code.go", "generated_proto.go", "auth/token.go"],
+      "expected_nodes": ["TokenProcessor", "SecurityPipeline", "SecretAuthorizer", "VerifyAuthToken", "GetUserInput", "SanitizeInput", "ExecuteDatabaseQuery", "RunDataFlow", "InspectMemoryHeader", "MasterAPIKey", "TotallyUnusedGlobalVariable", "ForgottenFunctionThatDoesNothing", "AbandonedStruct"],
       "expected_taint_path": ["GetUserInput", "SanitizeInput", "ExecuteDatabaseQuery"],
       "lsp_server": "gopls"
     },
     "typescript": {
       "path": "ts_src",
-      "files": ["test.ts"],
+      "files": ["test.ts", "types.ts"],
       "expected_nodes": ["UserProfile", "IUserManager", "UserManager", "AbandonedTsHelper", "getIncomingRegistrationPayload", "sanitizeProfile", "persistUserToDatabase", "registerUser", "getUserCount"],
       "expected_taint_path": ["getIncomingRegistrationPayload", "sanitizeProfile", "persistUserToDatabase"],
       "lsp_server": "typescript-language-server"
@@ -114,11 +114,16 @@
       "lsp_server": "solargraph"
     }
   },
+  "sca_manifests": {
+    "go_mod": "go.mod",
+    "package_json": "package.json",
+    "requirements_txt": "py_src/requirements.txt"
+  },
   "verification_assertions": {
     "deterministic_hash_algorithm": "SHA-256(canonical_nodes_asc + canonical_edges_asc)",
-    "golden_sha256_digest": "fb49961c1056b737966939ac05a6216cc66e8245ae5314b46d51dd317cc015c2",
-    "expected_reconciled_nodes": 1637,
-    "expected_reconciled_edges": 285,
+    "golden_sha256_digest": "912adccd3ca911982c3a57e5a79b99a15b3f59f9940d81e6e090360ea1768942",
+    "expected_reconciled_nodes": 1640,
+    "expected_reconciled_edges": 291,
     "expected_node_reconciliation_rate": "100.00%",
     "expected_edge_reconciliation_rate": "100.00%",
     "dead_code_quarantine_assertion": "Nodes with 0 in-degree and (DEAD CODE) badge must be quarantined in database verification pass",

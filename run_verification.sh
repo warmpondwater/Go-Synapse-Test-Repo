@@ -44,7 +44,7 @@ echo "  * Reconciled Nodes      : $NODES_RECONCILED"
 echo "  * Reconciled Edges      : $EDGES_RECONCILED"
 
 # 3. Assertions
-echo "[3/3] Running Validation Assertions..."
+echo "[3/4] Running AST Validation Assertions..."
 if [ -z "$INTEGRITY_HASH" ]; then
     echo "Assertion FAILED: Integrity hash is empty."
     exit 1
@@ -55,7 +55,12 @@ if [ "$NODES_RECONCILED" -lt 20 ]; then
     exit 1
 fi
 
+# 4. Run Offline SCA Verification
+echo "[4/4] Executing Offline Software Composition Analysis (SCA) Pass..."
+"$SYNAPSE_BIN" -audit=sca -offline -dir "$REPO_DIR"
+
 echo "=========================================================="
-echo "SUCCESS: AST Tree-sitter & LSP Integrity Hash Validated!"
+echo "SUCCESS: AST Tree-sitter, LSP & SCA Integrity Validated!"
 echo "Certificate generated and signed at: $CERT_PATH"
 echo "=========================================================="
+
