@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Go-Synapse-Test-Repo-Verification-Suite",
+  "version": "1.0.0",
+  "description": "Deterministic multi-language testbed and golden verification manifest for Go-Synapse Tree-sitter and LSP engine.",
+  "target_directory": "/Users/max/GitHub/Go-Synapse-Test-Repo",
+  "languages_covered": [
+    "Go",
+    "TypeScript",
+    "JavaScript",
+    "Python",
+    "Rust",
+    "C",
+    "C++",
+    "C#",
+    "Java",
+    "PHP",
+    "Ruby"
+  ],
+  "edge_typology_coverage": {
+    "calls": "Invoking functions or class/struct methods across files and local scopes",
+    "returns": "Returning values, variables, or struct/object instances from functions",
+    "reads": "Reading struct fields, object properties, or global variables",
+    "writes": "Mutating fields, variables, or assigning to memory locations",
+    "instantiates": "Creating struct pointers, new class instances, or object literals",
+    "references": "Declaring struct/interface member types or parameters referencing other symbols",
+    "implements": "Classes or structs implementing interfaces or traits",
+    "contains": "Hierarchical container edges (package -> file -> class/struct/function)"
+  },
+  "taint_security_patterns": {
+    "source_marker": "// (SOURCE) or # (SOURCE)",
+    "sanitizer_marker": "// (SANITIZER) or # (SANITIZER) or // (SHIELD)",
+    "sink_marker": "// (SINK) or # (SINK)",
+    "dead_code_marker": "// (DEAD CODE) or # (DEAD CODE)",
+    "secret_marker": "// (SECRET)",
+    "opaque_boundary_marker": "unsafe.Pointer or reflect.Value"
+  },
+  "test_suites": {
+    "go": {
+      "path": "go_src",
+      "files": ["main.go", "dataflow.go", "dead_code.go", "generated_proto.go"],
+      "expected_nodes": ["TokenProcessor", "SecurityPipeline", "GetUserInput", "SanitizeInput", "ExecuteDatabaseQuery", "RunDataFlow", "InspectMemoryHeader", "MasterAPIKey", "TotallyUnusedGlobalVariable", "ForgottenFunctionThatDoesNothing", "AbandonedStruct"],
+      "expected_taint_path": ["GetUserInput", "SanitizeInput", "ExecuteDatabaseQuery"],
+      "lsp_server": "gopls"
+    },
+    "typescript": {
+      "path": "ts_src",
+      "files": ["test.ts"],
+      "expected_nodes": ["UserProfile", "IUserManager", "UserManager", "AbandonedTsHelper", "getIncomingRegistrationPayload", "sanitizeProfile", "persistUserToDatabase", "registerUser", "getUserCount"],
+      "expected_taint_path": ["getIncomingRegistrationPayload", "sanitizeProfile", "persistUserToDatabase"],
+      "lsp_server": "typescript-language-server"
+    },
+    "javascript": {
+      "path": "js_src",
+      "files": ["test.js"],
+      "expected_nodes": ["NetworkClient", "abandonedJsHelper", "getUserSuppliedUrl", "sanitizeUrl", "executeNetworkRequest", "fetchResource", "main"],
+      "expected_taint_path": ["getUserSuppliedUrl", "sanitizeUrl", "executeNetworkRequest"],
+      "lsp_server": "typescript-language-server"
+    },
+    "python": {
+      "path": "py_src",
+      "files": ["test.py"],
+      "expected_nodes": ["AnalyticsEngine", "abandoned_python_utility", "fetch_untrusted_event", "sanitize_event_payload", "persist_analytics_event", "track_event", "_write_log"],
+      "expected_taint_path": ["fetch_untrusted_event", "sanitize_event_payload", "persist_analytics_event"],
+      "lsp_server": "pyright-langserver"
+    },
+    "rust": {
+      "path": "rust_src",
+      "files": ["test.rs"],
+      "expected_nodes": ["IFileProcessor", "DataPipeline", "abandoned_rust_helper", "fetch_untrusted_input", "sanitize_input", "dispatch_to_kernel_sink", "process_payload", "read_file_content", "main"],
+      "expected_taint_path": ["fetch_untrusted_input", "sanitize_input", "dispatch_to_kernel_sink"],
+      "lsp_server": "rust-analyzer"
+    },
+    "c": {
+      "path": "c_src",
+      "files": ["test.c"],
+      "expected_nodes": ["BufferContext", "abandoned_c_helper", "read_user_network_packet", "sanitize_c_buffer", "execute_c_kernel_command", "risky_operation", "process_data", "main"],
+      "expected_taint_path": ["read_user_network_packet", "sanitize_c_buffer", "execute_c_kernel_command"],
+      "lsp_server": "clangd"
+    },
+    "cpp": {
+      "path": "cpp_src",
+      "files": ["test.cpp"],
+      "expected_nodes": ["IPaymentAuthorizer", "UnreferencedCppHelper", "PaymentService", "fetchIncomingPayload", "sanitizePayload", "executeDatabaseTransfer", "authorize", "processPayment", "main"],
+      "expected_taint_path": ["fetchIncomingPayload", "sanitizePayload", "executeDatabaseTransfer"],
+      "lsp_server": "clangd"
+    },
+    "csharp": {
+      "path": "cs_src",
+      "files": ["test.cs"],
+      "expected_nodes": ["ISecurityAuditor", "UnusedCSharpService", "SecurityAuditor", "GetUntrustedPrincipal", "SanitizePrincipal", "DispatchToSecurityLog", "AuditAccess", "IsHealthy", "Program"],
+      "expected_taint_path": ["GetUntrustedPrincipal", "SanitizePrincipal", "DispatchToSecurityLog"],
+      "lsp_server": "omnisharp"
+    },
+    "java": {
+      "path": "java_src",
+      "files": ["test.java"],
+      "expected_nodes": ["IDataProcessor", "AbandonedJavaHelper", "PolyglotTest", "getUntrustedPayload", "sanitizePayload", "persistToDatabase", "processPayload", "readFile", "main"],
+      "expected_taint_path": ["getUntrustedPayload", "sanitizePayload", "persistToDatabase"],
+      "lsp_server": "jdtls"
+    },
+    "php": {
+      "path": "php_src",
+      "files": ["test.php"],
+      "expected_nodes": ["INotificationService", "AbandonedPhpHelper", "NotificationManager", "getIncomingUserNotice", "sanitizeNotice", "dispatchPushAlert", "sendNotification", "logNotification"],
+      "expected_taint_path": ["getIncomingUserNotice", "sanitizeNotice", "dispatchPushAlert"],
+      "lsp_server": "intelephense"
+    },
+    "ruby": {
+      "path": "ruby_src",
+      "files": ["test.rb"],
+      "expected_nodes": ["OrderProcessor", "abandoned_ruby_routine", "fetch_untrusted_order_spec", "sanitize_order_spec", "dispatch_to_fulfillment_gateway", "process!", "validate_order", "fulfill_order"],
+      "expected_taint_path": ["fetch_untrusted_order_spec", "sanitize_order_spec", "dispatch_to_fulfillment_gateway"],
+      "lsp_server": "solargraph"
+    }
+  },
+  "verification_assertions": {
+    "deterministic_hash_algorithm": "SHA-256(canonical_nodes_asc + canonical_edges_asc)",
+    "golden_sha256_digest": "fb49961c1056b737966939ac05a6216cc66e8245ae5314b46d51dd317cc015c2",
+    "expected_reconciled_nodes": 1637,
+    "expected_reconciled_edges": 285,
+    "expected_node_reconciliation_rate": "100.00%",
+    "expected_edge_reconciliation_rate": "100.00%",
+    "dead_code_quarantine_assertion": "Nodes with 0 in-degree and (DEAD CODE) badge must be quarantined in database verification pass",
+    "taint_continuity_assertion": "Every language must form an uninterrupted directed path from SOURCE -> SANITIZER -> SINK",
+    "zero_dangling_links_assertion": "Reconciliation pass must prune or verify 0 dangling edges pointing to non-existent nodes"
+  }
+}

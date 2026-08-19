@@ -1,16 +1,59 @@
-interface UserProfile {
+export interface UserProfile {
     id: string;
     username: string;
     email: string;
 }
 
-class UserManager {
+export interface IUserManager {
+    registerUser(profile: UserProfile): void;
+    getUserCount(): number;
+}
+
+// (DEAD CODE)
+export class AbandonedTsHelper {
+    public discard(): void {
+        const isolated = 777;
+        console.log("Dead TS code", isolated);
+    }
+}
+
+export class UserManager implements IUserManager {
     private users: Map<string, UserProfile> = new Map();
+    private registrationCount: number = 0;
+
+    // (SOURCE)
+    public getIncomingRegistrationPayload(): UserProfile {
+        return {
+            id: "usr_101",
+            username: "<script>alert('xss')</script>",
+            email: "alex@example.com"
+        };
+    }
+
+    // (SANITIZER)
+    public sanitizeProfile(profile: UserProfile): UserProfile {
+        return {
+            id: profile.id,
+            username: profile.username.replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+            email: encodeURI(profile.email)
+        };
+    }
+
+    // (SINK)
+    public persistUserToDatabase(profile: UserProfile): void {
+        console.log(`[TS SINK DB]: Persisting clean user profile: ${profile.id} -> ${profile.username}`);
+    }
 
     public registerUser(profile: UserProfile): void {
-        console.log(`Registering user ${profile.username}`);
-        this.users.set(profile.id, profile);
-        this.sendWelcomeEmail(profile.email);
+        this.registrationCount++;
+        const cleanProfile = this.sanitizeProfile(profile);
+        this.persistUserToDatabase(cleanProfile);
+        this.users.set(cleanProfile.id, cleanProfile);
+        this.sendWelcomeEmail(cleanProfile.email);
+    }
+
+    public getUserCount(): number {
+        return this.registrationCount;
     }
 
     private sendWelcomeEmail(email: string): void {
@@ -18,5 +61,8 @@ class UserManager {
     }
 }
 
-const manager = new UserManager();
-manager.registerUser({ id: "usr_101", username: "alex", email: "alex@example.com" });
+const manager: IUserManager = new UserManager();
+const concreteManager = new UserManager();
+const rawProfile = concreteManager.getIncomingRegistrationPayload();
+manager.registerUser(rawProfile);
+
