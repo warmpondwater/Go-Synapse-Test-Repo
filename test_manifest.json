@@ -3,6 +3,7 @@
   "name": "Go-Synapse-Test-Repo-Verification-Suite",
   "version": "1.0.0",
   "description": "Deterministic multi-language testbed and golden verification manifest for Go-Synapse Tree-sitter and LSP engine.",
+  "disclaimer": "All code snippets and scenarios in this testbed are for educational, testing, and benchmark demonstration purposes only. They contain deliberate flaws and must not be used in production or as definitive solutions.",
   "target_directory": "/Users/max/GitHub/Go-Synapse-Test-Repo",
   "languages_covered": [
     "Go",
@@ -121,9 +122,9 @@
   },
   "verification_assertions": {
     "deterministic_hash_algorithm": "SHA-256(canonical_nodes_asc + canonical_edges_asc)",
-    "golden_sha256_digest": "912adccd3ca911982c3a57e5a79b99a15b3f59f9940d81e6e090360ea1768942",
-    "expected_reconciled_nodes": 1640,
-    "expected_reconciled_edges": 291,
+    "golden_sha256_digest": "b6d6694cccee5348f5707004e52f0b33b593e8e89eef27b4d8a9219c4665964d",
+    "expected_reconciled_nodes": 1660,
+    "expected_reconciled_edges": 330,
     "expected_node_reconciliation_rate": "100.00%",
     "expected_edge_reconciliation_rate": "100.00%",
     "dead_code_quarantine_assertion": "Nodes with 0 in-degree and (DEAD CODE) badge must be quarantined in database verification pass",

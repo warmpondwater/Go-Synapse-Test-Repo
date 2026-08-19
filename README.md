@@ -4,8 +4,14 @@ Official multi-language testbed repository for **[Go-Synapse](https://warmpondwa
 
 ![Go-Synapse 2D Code Intelligence Graph with Edges](Images/With-Edges.png)
 
+> [!WARNING]
+> ### ⚠️ Educational, Benchmark & Demonstration Disclaimer
+> **IMPORTANT NOTICE:** All code samples, scenarios, synthetic vulnerabilities, anti-patterns, and architectural fragments contained within this repository are provided **strictly for educational, demonstration, and static analysis benchmarking purposes only**.
+>
+> They are intentionally engineered with deliberate design flaws, mock security vulnerabilities, syntax variations, and synthetic errors to evaluate AST parsers, LSP diagnostic enrichment, and graph verification algorithms. They **MUST NOT** be used in production environments, deployed in live systems, or construed as definitive architectural, financial, cryptographic, or legal solutions.
 
 ---
+
 
 ## Overview
 
