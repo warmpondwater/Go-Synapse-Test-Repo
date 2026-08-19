@@ -2,6 +2,9 @@
 
 Official multi-language testbed repository for **[Go-Synapse](https://warmpondwater.com)** — the local-first, interactive 2D code intelligence, AST mapping, and security verification engine.
 
+![Go-Synapse 2D Code Intelligence Graph with Edges](Images/With-Edges.png)
+
+
 ---
 
 ## Overview
