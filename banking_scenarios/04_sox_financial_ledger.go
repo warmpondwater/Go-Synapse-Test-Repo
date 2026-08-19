@@ -35,3 +35,14 @@ func RecordFiscalAuditEntry(entryID string, amount int64) *ComplianceLedgerRecor
 		EntryHash:   digest,
 	}
 }
+
+// ==============================================================================
+// 🎯 WHAT IS BEING ACHIEVED IN THIS SCENARIO:
+// 1. Regulatory Audit Attestation: Generates immutable cryptographic entry digests
+//    for SOX 404 compliance verification.
+// 2. Coordinate Reconciliation: Proves 100% AST integrity by matching on-disk source
+//    coordinates against the SQLite relational database (synapse.db).
+// 3. Tamper-Proof Signing: Feeds reconciled nodes and edges into the local RSA-2048
+//    signed audit certificate (logs/audit_certificate.json).
+// ==============================================================================
+

@@ -44,3 +44,14 @@ func ExecutePaymentFlow(useSanitizer bool) {
 		WriteTransactionToLedger(rawCard)
 	}
 }
+
+// ==============================================================================
+// 🎯 WHAT IS BEING ACHIEVED IN THIS SCENARIO:
+// 1. Taint Tracking (SAST): Evaluates Go-Synapse's source-to-sink reachability engine
+//    by tracing un-sanitized credit card input (SOURCE) directly into ledger storage (SINK).
+// 2. Visual Threat Isolation: On the 2D canvas, clicking the SOURCE dims 95% of unrelated
+//    code and highlights the unmasked financial data flow in glowing red (#ff1744).
+// 3. Remediation Verification: Validates that passing data through TokenizeAndMaskPAN
+//    (SANITIZER) resolves the INJECTION_RISK alert.
+// ==============================================================================
+

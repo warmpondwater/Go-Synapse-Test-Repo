@@ -36,3 +36,14 @@ func (r *ActiveModernSettlementRouter) RouteISO20022Payment(payload string) bool
 	fmt.Println("Routing modern ISO 20022 payment:", payload)
 	return true
 }
+
+// ==============================================================================
+// 🎯 WHAT IS BEING ACHIEVED IN THIS SCENARIO:
+// 1. Dead-Code Sweeper: Evaluates Go-Synapse's automated BFS graph reachability query
+//    to identify 0 in-degree isolated functions (Legacy1998SwiftMT103Parser, etc.).
+// 2. Visual Quarantine Containment: Automatically routes uncalled legacy financial
+//    routines into the dedicated red "Dead-Code Quarantine Box".
+// 3. Technical Debt Elimination: Provides architects with an instant, verified inventory
+//    of obsolete clearing routines ready for safe decommissioning.
+// ==============================================================================
+
